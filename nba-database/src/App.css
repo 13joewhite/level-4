@@ -1,0 +1,62 @@
+.App {
+  text-align: center;
+}
+
+.displayTeams {
+  display: grid;
+  grid-template-columns: 300px 300px 300px 300px 300px;
+  justify-content: center;
+  background-image: url(https://images.pexels.com/photos/220182/pexels-photo-220182.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500);
+
+}
+
+.teamPosition {
+  text-decoration: none;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+a:link, a:visited {
+  background-color: rgba(0, 0, 0, 0.164);
+  color: white;
+  padding: 14px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+a:hover{
+  background-color: #036cb767;
+  transition: 1s;
+}
+
+.roster:link, .roster:visited {
+  background-color: rgba(151, 57, 57, 0.534);
+  color: white;
+  padding: 14px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.roster:hover{
+  background-color: #036cb767;
+  transition: 1s;
+}
+
+header {
+  height: 25vh;
+  display: flex;
+  background-image: url(https://img.freepik.com/free-vector/basketball-court-illustration_64749-3198.jpg?size=626&ext=jpg);
+  background-size: contain;
+  justify-content: center;
+  align-items: center;
+}
+
+.database {
+  font-size: 90px;
+  color: #036BB7;
+  -webkit-text-stroke: 1px white;
+  font-family: sans;
+  text-shadow: 4px 4px rgb(0, 0, 0);
+}
