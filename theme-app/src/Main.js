@@ -9,7 +9,7 @@ function Main(){
         <main className="main-body">
             <Switch>
                 <Route exact path="/">
-                    <Home />
+                    <Home /> 
                 </Route>
                 <Route path="/about">
                     <About />

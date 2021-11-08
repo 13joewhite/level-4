@@ -1,20 +1,13 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import './App.css';
 import Form from "./Form"
 import DisplayUglyThings from "./DisplayUglyThings"
 
 function App() {
-  const [item, setItem] = useState({})
-
-  const editItem = (item) => {
-    console.log(item)
-    setItem(item)
-  }
-
   return (
     <div className="App">
-      <Form item={item}/>
-      <DisplayUglyThings editItem={editItem}/>
+      <Form />
+      <DisplayUglyThings />
     </div>
   );
 }

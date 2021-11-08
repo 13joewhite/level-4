@@ -1,13 +1,13 @@
 import React, {useState, useEffect} from "react"
-import {useParams, Link} from "react-router-dom"
+import {useParams, useHistory} from "react-router-dom"
 import axios from "axios"
 
 function PlayerInfo() {
     const [player, setPlayer] = useState([])
     const [team, setTeam] = useState([])
     const {teamSelected, playerSelected} = useParams()
+    const history = useHistory()
 
-    console.log(teamSelected)
 
     useEffect(() => {
         const options = {
@@ -21,7 +21,6 @@ function PlayerInfo() {
           
           axios.request(options).then(function (response) {
             setPlayer(response.data.api.players)
-            console.log(response)
             }).catch(function (error) {
               console.error(error);
           });
@@ -37,7 +36,6 @@ function PlayerInfo() {
           
           axios.request(options2).then(function (response) {
               setTeam(response.data.api.teams)
-            console.log(response.data)
             }).catch(function (error) {
               console.error(error);
           });
@@ -45,34 +43,53 @@ function PlayerInfo() {
 
     const teamDetails = team.map(teamInfo => {
         return (
-            <div>
+            <div key={teamInfo.teamId}>
                 <h1>{teamInfo.fullName}</h1>
             </div>
         )
     })
 
     const playerDetails = player.map(play => {
-        console.log(play)
+        function lengthConverter(){
+            return play.heightInMeters * 3.2808
+        }
+        const feet = Math.floor(lengthConverter())
+        const inches = Math.round((lengthConverter() - feet) * 12)
+
+        function weightConverter(){
+            return Math.floor(play.weightInKilograms * 2.2046)
+        }
+
         return (
-            <div  key={play.playerId}>
-                <header>
-                    <img 
-                        height="200" 
-                        width="200"
-                        src={"https://www.freepnglogos.com/uploads/nba-logo-png/nba-all-star-game-full-team-lebron-team-giannis-18.png"} />
-                    <h1 className="database">DATABASE</h1>
-                </header>
+            <div key={play.playerId}>
                 <h1>{play.firstName} {play.lastName}</h1>
-                <h2>Height: {play.heightInMeters}</h2>
-                <p>{play.firstName} {play.lastName} is from {play.country}, he played college basketball for {play.collegeName}. {play.firstName} was drafted in {play.startNba} and has been in the NBA for {play.yearsPro} years. He is {play.heightInMeters} meters tall and weighs {play.weightInKilograms} kilograms.</p>               
+                <h2>Height: {`${feet} Ft. ${inches} inches   `}</h2>
+                <h3 className="info">{play.firstName} {play.lastName} is from {play.country}, he played college basketball for {play.collegeName}. {play.firstName} was drafted in {play.startNba} and has been in the NBA for {play.yearsPro} years. He is {`${feet} feet ${inches} inches`} tall and weighs {weightConverter()} lbs.</h3> 
+                {teamDetails}              
             </div>
         )
     })
 
+    function handleClick(){
+        setTimeout(() => {
+            history.push(`/${teamSelected}`)
+        }, 500)
+    }
+
     return (
         <div>
-            {playerDetails}
-            {teamDetails}
+            <header>
+                <button className="backBtn" onClick={handleClick}>Back</button>
+                <img 
+                    height="200" 
+                    width="200"
+                    src={"https://www.freepnglogos.com/uploads/nba-logo-png/nba-all-star-game-full-team-lebron-team-giannis-18.png"} 
+                    alt="logo"/>
+                <h1 className="database">  DATABASE</h1>
+            </header>
+            <div className="displayPlayer">
+                {playerDetails}
+            </div>
         </div>
     )
 }

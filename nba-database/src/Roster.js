@@ -1,13 +1,12 @@
 import React, {useState, useEffect} from "react"
-import {useParams, Link} from "react-router-dom"
+import {useParams, Link, useHistory} from "react-router-dom"
 import axios from "axios"
 
 
 function Roster() {
     const [roster, setRoster] = useState([])
     const {teamSelected} = useParams()
-
-    console.log(teamSelected)
+    const history = useHistory()
 
     useEffect(() => {
         const options = {
@@ -21,14 +20,12 @@ function Roster() {
           
           axios.request(options).then(function (response) {
             setRoster(response.data.api.players)
-            console.log(response)
             }).catch(function (error) {
               console.error(error);
           });
     }, [])
 
         const teamRoster = roster.map(rost => {
-            console.log(rost)
             return (
                 <div className="teamPosition" key={rost.playerId}>
                         <Link to={`/${rost.teamId}/${rost.playerId}:`} width="100" height="100" className="roster" >
@@ -37,16 +34,23 @@ function Roster() {
                 </div>
             )
         })
-        console.log(roster)
-
-    return (
-        <div>
+        
+        function handleClick(){
+            setTimeout(() => {
+                history.push("/")
+            }, 500)
+        }
+        
+        return (
+            <div>
             <header>
+                <button className="backBtn" onClick={handleClick}>Back</button>
                 <img 
                     height="200" 
                     width="200"
-                    src={"https://www.freepnglogos.com/uploads/nba-logo-png/nba-all-star-game-full-team-lebron-team-giannis-18.png"} />
-                <h1 className="database">DATABASE</h1>
+                    src={"https://www.freepnglogos.com/uploads/nba-logo-png/nba-all-star-game-full-team-lebron-team-giannis-18.png"} 
+                    alt="logo"/>
+                <h1 className="database">  DATABASE</h1>
             </header>
             <div className="displayTeams">
                 {teamRoster}               

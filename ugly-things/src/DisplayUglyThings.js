@@ -1,44 +1,28 @@
-import React, {useState, useEffect} from "react"
-import axios from "axios"
+import React, {useContext} from "react"
+import {InputContext} from "./inputContext.js"
 
-function DisplayUglyThings(props) {
-    const [display, setDisplay] = useState([])
+function DisplayUglyThings() {
+    const {display, deleteItem, toggleEditMode, submitEdits, editHandleChange, editInputData} = useContext(InputContext)
 
-    useEffect(() => {
-        axios.get("https://api.vschool.io/josephwhite/thing")
-        .then(response => response.data)
-        .then((response) => {
-            setDisplay(response)
-        })
-    }, [])
-
-    const getItems = () => {
-        axios.get("https://api.vschool.io/josephwhite/thing")
-        .then(response => response.data)
-        .then((response) => {
-            setDisplay(response)
-        })
-    }
-
-    const deleteItem = (id) => {
-        axios.delete(`https://api.vschool.io/josephwhite/thing/${id}`)
-            .then(response => getItems())
-            .catch(error => console.log(error))
-        const newDisplay = display.filter(item => item._id !== id)
-        setDisplay([...newDisplay])
-    }
-
-
-    
     let postToScreen = display.map(item => {
-        console.log(item)
+        console.log("Edit Input Dataxs " + editInputData.title)
         return (
+            item.editMode === false ?
             <div className="screen-display">
                 <h2>{item.title}</h2>
                 <p>{item.description}</p>
-                <button onClick={() => props.editItem(item)} className="btns">Edit</button>
                 <button onClick={() => deleteItem(item._id)} className="btns">Delete</button>
+                <button onClick={() => toggleEditMode(item._id)}>Edit</button>
                 <img src={item.imgUrl} alt=""/>
+            </div>
+            :
+            <div className="screen-display">
+                <form onSubmit={(e) => submitEdits(e, item._id)} className="form">
+                    <input className="form-option" type="text" name="title" placeholder="Title" value={editInputData.title? editInputData.title : ""} onChange={editHandleChange}/>
+                    <input className="form-option" type="text" name="imgUrl" placeholder="Img URL" value={editInputData.imgUrl? editInputData.imgUrl: ""} onChange={editHandleChange}/>
+                    <input className="form-option" type="text" name="description" placeholder="Description" value={editInputData.description ? editInputData.description : ""} onChange={editHandleChange}/>
+                    <button className="form-option">Submit</button>
+                </form>
             </div>
         )
     })

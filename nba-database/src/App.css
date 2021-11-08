@@ -4,10 +4,36 @@
 
 .displayTeams {
   display: grid;
-  grid-template-columns: 300px 300px 300px 300px 300px;
+  grid-template-columns: 250px 250px 250px 250px 250px;
   justify-content: center;
   background-image: url(https://images.pexels.com/photos/220182/pexels-photo-220182.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500);
+}
 
+.displayPlayer {
+  display: grid;
+  justify-content: center;
+  background-image: url(https://image.freepik.com/free-vector/hardwood-maple-basketball-court-floor_64749-1882.jpg);
+  height: 100vh;
+}
+
+.backBtn {
+  border: black 5px;
+  height: 50px;
+  width: 90px;
+  background-color: #036cb7b9;
+  color: white;
+}
+
+.backBtn:hover {
+  background-color: rgba(151, 57, 57, 0.534);
+  color: black;
+  transition: 1s;
+}
+
+.info {
+  font-family: sans;
+  font-size: larger;
+  padding: 10px 10px;
 }
 
 .teamPosition {
@@ -28,6 +54,7 @@ a:link, a:visited {
 a:hover{
   background-color: #036cb767;
   transition: 1s;
+  color: black;
 }
 
 .roster:link, .roster:visited {
@@ -41,6 +68,7 @@ a:hover{
 
 .roster:hover{
   background-color: #036cb767;
+  color: black;
   transition: 1s;
 }
 

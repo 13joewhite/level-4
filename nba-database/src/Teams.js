@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react"
 import axios from "axios"
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom"
 
 function Teams() {
     const [teams, setTeams] = useState([])
@@ -17,7 +17,6 @@ function Teams() {
           
           axios.request(options).then(function (response) {
               const newTeams = response.data.api.teams.filter(team => team.nbaFranchise === "1" && team.teamId !== "37")
-              console.log(newTeams)
               setTeams(newTeams)
           }).catch(function (error) {
               console.error(error);
@@ -32,7 +31,7 @@ function Teams() {
         return (
             <div className="teamPosition" key={team.teamId}>
                 <Link to={`/${team.teamId}`}>
-                    <img 
+                    <img  
                         width="150" 
                         height="150" 
                         onError={handleImgError} 
@@ -43,15 +42,16 @@ function Teams() {
             </div>
         )
     })
-    
+
     return (
         <div>
             <header>
                 <img 
                     height="200" 
                     width="200"
-                    src={"https://www.freepnglogos.com/uploads/nba-logo-png/nba-all-star-game-full-team-lebron-team-giannis-18.png"} />
-                <h1 className="database">DATABASE</h1>
+                    src={"https://www.freepnglogos.com/uploads/nba-logo-png/nba-all-star-game-full-team-lebron-team-giannis-18.png"} 
+                    alt="logo"/>
+                <h1 className="database">  DATABASE</h1>
             </header>
             <div className="displayTeams">
                 {teamsListed}               

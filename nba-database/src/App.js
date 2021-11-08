@@ -3,9 +3,8 @@ import React from "react"
 import Teams from "./Teams"
 import Roster from "./Roster"
 import PlayerInfo from "./PlayerInfo"
-import {Switch, Route} from "react-router-dom"
 
-
+ 
 function App() {
   return (
     <div className="App">
